@@ -1,6 +1,6 @@
 const API_WEB = 'https://pixabay.com/api/';
 const API_KEY = '?key=30054612-8d338f00f07d687f9e2b96ac6&';
-const API_ORDER = 4;
+const API_ORDER = 40;
 
 export default class PhotoApiService {
   constructor() {
@@ -8,16 +8,14 @@ export default class PhotoApiService {
     this.page = 1;
   }
 
-  fetchPhotos() {
-    return fetch(
+  async fetchPhotos() {
+    const responce = await fetch(
       `${API_WEB}${API_KEY}q=${this.needToFind}&image_type=photo&orientation=horizontal&safesearch=true&per_page=${API_ORDER}&page=${this.page}`
-    )
-      .then(responce => responce.json())
-      .then(data => {
-        this.addPhotos();
-        console.log(data);
-        return data.hits;
-      });
+    );
+    const data = await responce.json();
+    this.addPhotos();
+    console.log(data);
+    return data;
   }
 
   addPhotos() {

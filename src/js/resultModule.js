@@ -20,13 +20,28 @@ function onFormSubmit(event) {
 
   photoApiService.query = event.currentTarget.elements.searchQuery.value;
   photoApiService.resetPhotos();
-  photoApiService.fetchPhotos().then(createPhotoEl);
-  Notiflix.Notify.success(`We find you photo!`);
+  photoApiService.fetchPhotos().then(data => {
+    if (data.total > 1) {
+      gallery.innerHTML = '';
+      createPhotoEl(data.hits);
+      Notiflix.Notify.success(`We find you photo!`);
+      Notiflix.Notify.info(`Hooray! We found ${data.totalHits} images.`);
+      loadMoreBtn.style.cssText = 'visibility: visible';
+    } else if (data.total === 0) {
+      gallery.innerHTML = '';
+      Notiflix.Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again!'
+      );
+      loadMoreBtn.style.cssText = 'visibility: hidden;';
+    }
+  });
 }
 
 function onLoadMore() {
-  photoApiService.fetchPhotos().then(createPhotoEl);
-  Notiflix.Notify.success(`We find you photo!`);
+  photoApiService.fetchPhotos().then(data => {
+    createPhotoEl(data.hits);
+  });
+  Notiflix.Notify.success(`You load next photos page!`);
 }
 
 function createPhotoEl(photos) {
@@ -53,27 +68,6 @@ function createPhotoEl(photos) {
     gallery.insertAdjacentHTML('beforeend', markupPhoto);
   });
 }
-
-//   fetchPhotos(searchPhotos, pages).then(data => {
-//     if (data.total > 1) {
-//       gallery.innerHTML = '';
-//       createPhotoEl(data.hits);
-//       Notiflix.Notify.warning(`Hooray! We found ${data.totalHits} images.`);
-//       Notiflix.Notify.success(`We find you photo!`);
-//       // onLoadMorePressed();
-//       createPhotoEl(data.hits);
-//       loadMoreBtn.style.cssText = 'visibility: visible';
-//       pages = 1;
-//     } else if (data.total === 0) {
-//       gallery.innerHTML = '';
-//       Notiflix.Notify.failure(
-//         '"Sorry, there are no images matching your search query. Please try again."'
-//       );
-//     }
-
-//     // console.log(data.hits)
-//   });
-// }
 
 //? код без класса(олд)
 // import { fetchPhotos } from './fetchModule';
