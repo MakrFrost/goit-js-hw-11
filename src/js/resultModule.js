@@ -18,13 +18,15 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 function onFormSubmit(event) {
   event.preventDefault();
 
-  photoApiService.query = event.currentTarget.elements.query.value;
+  photoApiService.query = event.currentTarget.elements.searchQuery.value;
   photoApiService.resetPhotos();
   photoApiService.fetchPhotos().then(createPhotoEl);
+  Notiflix.Notify.success(`We find you photo!`);
 }
 
 function onLoadMore() {
   photoApiService.fetchPhotos().then(createPhotoEl);
+  Notiflix.Notify.success(`We find you photo!`);
 }
 
 function createPhotoEl(photos) {

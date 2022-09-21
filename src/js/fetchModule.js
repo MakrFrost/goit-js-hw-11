@@ -1,6 +1,6 @@
 const API_WEB = 'https://pixabay.com/api/';
 const API_KEY = '?key=30054612-8d338f00f07d687f9e2b96ac6&';
-const API_ORDER = 8;
+const API_ORDER = 4;
 
 export default class PhotoApiService {
   constructor() {
@@ -14,7 +14,7 @@ export default class PhotoApiService {
     )
       .then(responce => responce.json())
       .then(data => {
-        this.incrementPage();
+        this.addPhotos();
         console.log(data);
         return data.hits;
       });
