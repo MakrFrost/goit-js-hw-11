@@ -31,7 +31,14 @@
 }
 
 .search-button {
+  font-weight: 500;
   margin-left: 10px;
+  padding: 6px;
+  border-radius: 2px;
+  cursor: pointer;
+  &:hover {
+    background-color: #bdbcbc;
+  }
 }
 
 .gallery {
@@ -40,6 +47,11 @@
   justify-content: center;
   margin-top: calc(-1 * 30px);
   margin-left: calc(-1 * 30px);
+}
+
+.gallery a {
+  text-decoration: none;
+  color: black;
 }
 
 .photo-card {
@@ -84,10 +96,16 @@ span {
 }
 
 .load-more {
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 5px;
   display: block;
   margin: auto;
   margin-top: 30px;
   margin-bottom: 20px;
   cursor: pointer;
   visibility: hidden;
+  &:hover {
+    background-color: #bdbcbc;
+  }
 }

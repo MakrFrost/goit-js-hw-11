@@ -2,13 +2,13 @@ import Notiflix from 'notiflix';
 import PhotoApiService from './fetchModule';
 const axios = require('axios');
 
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const photoApiService = new PhotoApiService();
 
-//* форма поиска
 const formEl = document.querySelector('.search-form');
-//* галерея с фото
 const gallery = document.querySelector('.gallery');
-//* кнопка "показать больше"
 const loadMoreBtn = document.querySelector('.load-more');
 
 formEl.addEventListener('submit', onFormSubmit);
@@ -18,8 +18,15 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 function onFormSubmit(event) {
   event.preventDefault();
 
-  photoApiService.query = event.currentTarget.elements.searchQuery.value;
+  photoApiService.query = event.currentTarget.elements.searchQuery.value.trim();
   photoApiService.resetPhotos();
+
+  if (photoApiService.query === '') {
+    loadMoreBtn.style.cssText = 'visibility: hidden;';
+    gallery.innerHTML = '';
+    return Notiflix.Notify.warning('Please enter 1 character!');
+  }
+
   photoApiService.fetchPhotos().then(data => {
     if (data.total > 1) {
       gallery.innerHTML = '';
@@ -27,11 +34,15 @@ function onFormSubmit(event) {
       Notiflix.Notify.success(`We find you photo!`);
       Notiflix.Notify.info(`Hooray! We found ${data.totalHits} images.`);
       loadMoreBtn.style.cssText = 'visibility: visible';
-    } else if (data.total === 0) {
+    }
+    if (data.total === 0) {
       gallery.innerHTML = '';
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again!'
       );
+      loadMoreBtn.style.cssText = 'visibility: hidden;';
+    }
+    if (data.total <= 40) {
       loadMoreBtn.style.cssText = 'visibility: hidden;';
     }
   });
@@ -68,6 +79,34 @@ function createPhotoEl(photos) {
     gallery.insertAdjacentHTML('beforeend', markupPhoto);
   });
 }
+
+// //! лайтбокс
+// let boxGallery = new SimpleLightbox('.gallery a');
+
+// let captionsData = (boxGallery.options.captionsData = 'alt');
+// let captionDelay = (boxGallery.options.captionDelay = 250);
+
+// TODO кусок кода с сылкой под лайтбокс
+// `<a href="${photo.largeImageURL}"
+//   ><div class="photo-card">
+//     <img src="${photo.webformatURL}" alt="${photo.tags}" loading="lazy" />
+//     <div class="info">
+//       <p class="info-item">
+//         <b>Likes <span>${photo.likes}</span></b>
+//       </p>
+//       <p class="info-item">
+//         <b>Views <span>${photo.views}</span></b>
+//       </p>
+//       <p class="info-item">
+//         <b>Comments <span>${photo.comments}</span></b>
+//       </p>
+//       <p class="info-item">
+//         <b>Downloads <span>${photo.downloads}</span></b>
+//       </p>
+//     </div>
+//   </div></a
+// >
+// `;
 
 //? код без класса(олд)
 // import { fetchPhotos } from './fetchModule';
