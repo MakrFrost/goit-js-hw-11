@@ -5,9 +5,12 @@ const axios = require('axios');
 const inputEl = document.querySelector('[name="searchQuery"]');
 const buttonEl = document.querySelector('.search-button');
 const gallery = document.querySelector('.gallery');
+const loadMoreButton = document.querySelector('.load-more');
 
 buttonEl.addEventListener('click', onFormSubmit);
 inputEl.addEventListener('input', onInputActive);
+//!
+loadMoreButton.addEventListener('click', onLoadMorePressed);
 
 //! функционал
 
@@ -16,12 +19,26 @@ function onInputActive(event) {}
 function onFormSubmit(event) {
   event.preventDefault();
   let searchPhotos = inputEl.value.trim();
+  let page = 1;
 
-  fetchPhotos(searchPhotos).then(
-    data => createPhotoEl(data.hits)
+  fetchPhotos(searchPhotos, page).then(data => {
+    if (data.total > 1) {
+      gallery.innerHTML = '';
+      createPhotoEl(data.hits);
+      Notiflix.Notify.success(`We find you photo!`);
+
+      // !
+      onLoadMorePressed(page);
+      // !
+    } else if (data.total === 0) {
+      gallery.innerHTML = '';
+      Notiflix.Notify.failure(
+        '"Sorry, there are no images matching your search query. Please try again."'
+      );
+    }
+
     // console.log(data.hits)
-  );
-  Notiflix.Notify.info(`Мы нашли твои фото`);
+  });
 }
 
 //? разметка для создания галереи
@@ -31,16 +48,16 @@ function createPhotoEl(photos) {
   <img src="${photo.largeImageURL}" alt="${photo.tags}" loading="lazy" />
   <div class="info">
     <p class="info-item">
-      <b>Likes : ${photo.likes}</b>
+      <b>Likes <span>${photo.likes}</span></b>
     </p>
     <p class="info-item">
-      <b>Views : ${photo.views}</b>
+      <b>Views <span>${photo.views}</span></b>
     </p>
     <p class="info-item">
-      <b>Comments : ${photo.comments}</b>
+      <b>Comments <span>${photo.comments}</span></b>
     </p>
     <p class="info-item">
-      <b>Downloads : ${photo.downloads}</b>
+      <b>Downloads <span>${photo.downloads}</span></b>
     </p>
   </div>
 </div>`;
@@ -50,15 +67,7 @@ function createPhotoEl(photos) {
   });
 }
 
-// function makeCountryList(countries) {
-//   const countryList = countries.map(country => {
-//     return `<li class="country-list__item">
-//             <img src=${country.flags.png} width="80" alt="flag">
-//             <span>${country.name.official}</span>
-//         </li>`;
-//   });
-//   countryList.forEach(markupCountry => {
-//     countryListEl.insertAdjacentHTML('beforeend', markupCountry);
-//     console.log('выполнилась функция makeCountryList для стран');
-//   });
-// }
+//!
+function onLoadMorePressed(pages) {
+  pages = +1;
+}
