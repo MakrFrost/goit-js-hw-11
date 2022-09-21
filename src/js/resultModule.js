@@ -27,6 +27,7 @@ function onFormSubmit(event) {
       // onLoadMorePressed();
       createPhotoEl(data.hits);
       loadMoreButton.style.cssText = 'visibility: visible';
+      pages = 1;
     } else if (data.total === 0) {
       gallery.innerHTML = '';
       Notiflix.Notify.failure(
@@ -68,4 +69,5 @@ function createPhotoEl(photos) {
 function onLoadMorePressed() {
   pages += 1;
   console.log(pages);
+  onFormSubmit(event);
 }
