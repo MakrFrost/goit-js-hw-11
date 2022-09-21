@@ -2,14 +2,14 @@ import { fetchPhotos } from './fetchModule';
 import Notiflix from 'notiflix';
 const axios = require('axios');
 
-const searchForm = document.querySelector('.search-form');
+const inputEl = document.querySelector('[name="searchQuery"]');
 const buttonEl = document.querySelector('.search-button');
 
 const gallery = document.querySelector('.gallery');
 const loadMoreButton = document.querySelector('.load-more');
 
-searchForm.addEventListener('submit', onFormSubmit);
-searchForm.addEventListener('input', onInputActive);
+buttonEl.addEventListener('click', onFormSubmit);
+inputEl.addEventListener('input', onInputActive);
 //!
 loadMoreButton.addEventListener('click', onLoadMorePressed);
 
@@ -20,7 +20,7 @@ function onInputActive(event) {}
 
 function onFormSubmit(event) {
   event.preventDefault();
-  let searchPhotos = searchForm.value;
+  let searchPhotos = inputEl.value.trim();
 
   fetchPhotos(searchPhotos, pages).then(data => {
     if (data.total > 1) {
