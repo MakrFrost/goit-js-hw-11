@@ -4,20 +4,16 @@ const axios = require('axios');
 
 const inputEl = document.querySelector('[name="searchQuery"]');
 const buttonEl = document.querySelector('.search-button');
-
 const gallery = document.querySelector('.gallery');
 const loadMoreButton = document.querySelector('.load-more');
 
 buttonEl.addEventListener('click', onFormSubmit);
-inputEl.addEventListener('input', onInputActive);
 //!
 loadMoreButton.addEventListener('click', onLoadMorePressed);
 
 let pages = 1;
 
 //! функционал
-function onInputActive(event) {}
-
 function onFormSubmit(event) {
   event.preventDefault();
   let searchPhotos = inputEl.value.trim();
@@ -27,7 +23,7 @@ function onFormSubmit(event) {
       gallery.innerHTML = '';
       createPhotoEl(data.hits);
       Notiflix.Notify.success(`We find you photo!`);
-      onLoadMorePressed();
+      // onLoadMorePressed();
       createPhotoEl(data.hits);
       loadMoreButton.style.cssText = 'visibility: visible';
     } else if (data.total === 0) {

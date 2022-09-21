@@ -43,10 +43,21 @@
 }
 
 .photo-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+
+  padding: 15px;
+  border: 1px solid rgba(128, 128, 128, 0.658);
   max-width: 100%;
   flex-basis: calc(100% / 4 - 30px);
   margin-top: 30px;
   margin-left: 30px;
+
+  box-shadow: 10px 10px 18px -1px rgba(0, 0, 0, 0.62);
+  -webkit-box-shadow: 10px 10px 18px -1px rgba(0, 0, 0, 0.62);
+  -moz-box-shadow: 10px 10px 18px -1px rgba(0, 0, 0, 0.62);
+
   &:not(:last-child) {
     margin-bottom: 0;
   }
@@ -59,6 +70,7 @@
   justify-content: space-around;
 }
 .info-item {
+  margin-left: 6px;
 }
 
 .page-markup {
@@ -70,6 +82,7 @@
 .load-more {
   display: block;
   margin: auto;
+  margin-top: 30px;
   margin-bottom: 20px;
   cursor: pointer;
   visibility: hidden;
