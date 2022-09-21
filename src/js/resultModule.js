@@ -2,34 +2,34 @@ import { fetchPhotos } from './fetchModule';
 import Notiflix from 'notiflix';
 const axios = require('axios');
 
-const inputEl = document.querySelector('[name="searchQuery"]');
+const searchForm = document.querySelector('.search-form');
 const buttonEl = document.querySelector('.search-button');
+
 const gallery = document.querySelector('.gallery');
 const loadMoreButton = document.querySelector('.load-more');
 
-buttonEl.addEventListener('click', onFormSubmit);
-inputEl.addEventListener('input', onInputActive);
+searchForm.addEventListener('submit', onFormSubmit);
+searchForm.addEventListener('input', onInputActive);
 //!
 loadMoreButton.addEventListener('click', onLoadMorePressed);
 
-//! функционал
+let pages = 1;
 
+//! функционал
 function onInputActive(event) {}
 
 function onFormSubmit(event) {
   event.preventDefault();
-  let searchPhotos = inputEl.value.trim();
-  let page = 1;
+  let searchPhotos = searchForm.value;
 
-  fetchPhotos(searchPhotos, page).then(data => {
+  fetchPhotos(searchPhotos, pages).then(data => {
     if (data.total > 1) {
       gallery.innerHTML = '';
       createPhotoEl(data.hits);
       Notiflix.Notify.success(`We find you photo!`);
-
-      // !
-      onLoadMorePressed(page);
-      // !
+      onLoadMorePressed();
+      createPhotoEl(data.hits);
+      loadMoreButton.style.cssText = 'visibility: visible';
     } else if (data.total === 0) {
       gallery.innerHTML = '';
       Notiflix.Notify.failure(
@@ -68,6 +68,7 @@ function createPhotoEl(photos) {
 }
 
 //!
-function onLoadMorePressed(pages) {
-  pages = +1;
+function onLoadMorePressed() {
+  pages += 1;
+  console.log(pages);
 }
