@@ -22,6 +22,7 @@ function onFormSubmit(event) {
     if (data.total > 1) {
       gallery.innerHTML = '';
       createPhotoEl(data.hits);
+      Notiflix.Notify.warning(`Hooray! We found ${data.totalHits} images.`);
       Notiflix.Notify.success(`We find you photo!`);
       // onLoadMorePressed();
       createPhotoEl(data.hits);
