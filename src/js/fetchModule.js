@@ -49,5 +49,4 @@ export default class PhotoApiService {
 //     return response.json();
 //   });
 // }
-
 // export { fetchPhotos };

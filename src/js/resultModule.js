@@ -2,10 +2,8 @@ import Notiflix from 'notiflix';
 import PhotoApiService from './fetchModule';
 const axios = require('axios');
 
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
-const photoApiService = new PhotoApiService();
+// import SimpleLightbox from 'simplelightbox';
+// import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const formEl = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
@@ -13,6 +11,8 @@ const loadMoreBtn = document.querySelector('.load-more');
 
 formEl.addEventListener('submit', onFormSubmit);
 loadMoreBtn.addEventListener('click', onLoadMore);
+
+const photoApiService = new PhotoApiService();
 
 //! функционал
 function onFormSubmit(event) {
