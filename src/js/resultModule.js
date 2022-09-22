@@ -1,6 +1,5 @@
 import Notiflix from 'notiflix';
 import PhotoApiService from './fetchModule';
-const axios = require('axios');
 
 // import SimpleLightbox from 'simplelightbox';
 // import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -30,6 +29,7 @@ async function onFormSubmit(event) {
   await photoApiService
     .fetchPhotos()
     .then(data => {
+      console.log(data);
       if (data.total > 1) {
         gallery.innerHTML = '';
         createPhotoEl(data.hits);

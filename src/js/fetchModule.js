@@ -1,4 +1,3 @@
-// const axios = require('axios');
 import axios from 'axios';
 
 const API_WEB = 'https://pixabay.com/api/';
@@ -15,15 +14,16 @@ export default class PhotoApiService {
 
   async fetchPhotos() {
     try {
-      const responce = await fetch(
+      const responce = await axios.get(
         `${API_WEB}${API_KEY}q=${this.needToFind}${API_OPTIONS}${API_ORDER}&page=${this.page}`
       );
 
-      const data = await responce.json();
+      const data = responce.data;
+      // console.log(data);
+
+      // const data = await responce.json();
 
       this.addPhotos();
-
-      console.log(data);
 
       return data;
     } catch (error) {
