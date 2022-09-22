@@ -15,7 +15,7 @@ export default class PhotoApiService {
 
   async fetchPhotos() {
     try {
-      const responce = await axios.get(
+      const responce = await fetch(
         `${API_WEB}${API_KEY}q=${this.needToFind}${API_OPTIONS}${API_ORDER}&page=${this.page}`
       );
 
