@@ -27,31 +27,37 @@ async function onFormSubmit(event) {
     return Notiflix.Notify.warning('Please enter 1 character!');
   }
 
-  await photoApiService.fetchPhotos().then(data => {
-    if (data.total > 1) {
-      gallery.innerHTML = '';
-      createPhotoEl(data.hits);
-      Notiflix.Notify.success(`We find you photo!`);
-      Notiflix.Notify.info(`Hooray! We found ${data.totalHits} images.`);
-      loadMoreBtn.style.cssText = 'visibility: visible';
-    }
-    if (data.total === 0) {
-      gallery.innerHTML = '';
-      Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again!'
-      );
-      loadMoreBtn.style.cssText = 'visibility: hidden;';
-    }
-    if (data.total <= 40) {
-      loadMoreBtn.style.cssText = 'visibility: hidden;';
-    }
-  });
+  await photoApiService
+    .fetchPhotos()
+    .then(data => {
+      if (data.total > 1) {
+        gallery.innerHTML = '';
+        createPhotoEl(data.hits);
+        Notiflix.Notify.success(`We find you photo!`);
+        Notiflix.Notify.info(`Hooray! We found ${data.totalHits} images.`);
+        loadMoreBtn.style.cssText = 'visibility: visible';
+      }
+      if (data.total === 0) {
+        gallery.innerHTML = '';
+        Notiflix.Notify.failure(
+          'Sorry, there are no images matching your search query. Please try again!'
+        );
+        loadMoreBtn.style.cssText = 'visibility: hidden;';
+      }
+      if (data.total <= 40) {
+        loadMoreBtn.style.cssText = 'visibility: hidden;';
+      }
+    })
+    .catch('Error on function');
 }
 
 async function onLoadMore() {
-  await photoApiService.fetchPhotos().then(data => {
-    createPhotoEl(data.hits);
-  });
+  await photoApiService
+    .fetchPhotos()
+    .then(data => {
+      createPhotoEl(data.hits);
+    })
+    .catch('Error on function', error);
   Notiflix.Notify.success(`You load next photos page!`);
 }
 
