@@ -15,7 +15,7 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 const photoApiService = new PhotoApiService();
 
 //! функционал
-function onFormSubmit(event) {
+async function onFormSubmit(event) {
   event.preventDefault();
 
   photoApiService.query = event.currentTarget.elements.searchQuery.value.trim();
@@ -27,7 +27,7 @@ function onFormSubmit(event) {
     return Notiflix.Notify.warning('Please enter 1 character!');
   }
 
-  photoApiService.fetchPhotos().then(data => {
+  await photoApiService.fetchPhotos().then(data => {
     if (data.total > 1) {
       gallery.innerHTML = '';
       createPhotoEl(data.hits);
@@ -48,8 +48,8 @@ function onFormSubmit(event) {
   });
 }
 
-function onLoadMore() {
-  photoApiService.fetchPhotos().then(data => {
+async function onLoadMore() {
+  await photoApiService.fetchPhotos().then(data => {
     createPhotoEl(data.hits);
   });
   Notiflix.Notify.success(`You load next photos page!`);
