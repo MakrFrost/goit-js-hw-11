@@ -17,11 +17,7 @@ export default class PhotoApiService {
       const responce = await axios.get(
         `${API_WEB}${API_KEY}q=${this.needToFind}${API_OPTIONS}${API_ORDER}&page=${this.page}`
       );
-
       const data = responce.data;
-      // console.log(data);
-
-      // const data = await responce.json();
 
       this.addPhotos();
 

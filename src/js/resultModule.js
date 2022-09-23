@@ -1,9 +1,6 @@
 import Notiflix from 'notiflix';
 import PhotoApiService from './fetchModule';
 
-// import SimpleLightbox from 'simplelightbox';
-// import 'simplelightbox/dist/simple-lightbox.min.css';
-
 const formEl = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
@@ -29,7 +26,6 @@ async function onFormSubmit(event) {
   await photoApiService
     .fetchPhotos()
     .then(data => {
-      console.log(data);
       if (data.total > 1) {
         gallery.innerHTML = '';
         createPhotoEl(data.hits);
