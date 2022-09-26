@@ -11,7 +11,7 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 const photoApiService = new PhotoApiService();
 
 //! функционал
-async function onFormSubmit(event) {
+function onFormSubmit(event) {
   event.preventDefault();
 
   photoApiService.query = event.currentTarget.elements.searchQuery.value.trim();
@@ -23,7 +23,7 @@ async function onFormSubmit(event) {
     return Notiflix.Notify.warning('Please enter 1 character!');
   }
 
-  await photoApiService
+  photoApiService
     .fetchPhotos()
     .then(data => {
       if (data.total > 1) {
