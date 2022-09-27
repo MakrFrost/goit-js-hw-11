@@ -82,33 +82,33 @@ function createPhotoEl(photos) {
   });
 }
 
-// //! лайтбокс
-// let boxGallery = new SimpleLightbox('.gallery a');
+//! лайтбокс
+let boxGallery = new SimpleLightbox('.gallery a');
 
-// let captionsData = (boxGallery.options.captionsData = 'alt');
-// let captionDelay = (boxGallery.options.captionDelay = 250);
+let captionsData = (boxGallery.options.captionsData = 'alt');
+let captionDelay = (boxGallery.options.captionDelay = 250);
 
-// TODO кусок кода с сылкой под лайтбокс
-// `<a href="${photo.largeImageURL}"
-//   ><div class="photo-card">
-//     <img src="${photo.webformatURL}" alt="${photo.tags}" loading="lazy" />
-//     <div class="info">
-//       <p class="info-item">
-//         <b>Likes <span>${photo.likes}</span></b>
-//       </p>
-//       <p class="info-item">
-//         <b>Views <span>${photo.views}</span></b>
-//       </p>
-//       <p class="info-item">
-//         <b>Comments <span>${photo.comments}</span></b>
-//       </p>
-//       <p class="info-item">
-//         <b>Downloads <span>${photo.downloads}</span></b>
-//       </p>
-//     </div>
-//   </div></a
-// >
-// `;
+TODO кусок кода с сылкой под лайтбокс
+`<a href="${photo.largeImageURL}"
+  ><div class="photo-card">
+    <img src="${photo.webformatURL}" alt="${photo.tags}" loading="lazy" />
+    <div class="info">
+      <p class="info-item">
+        <b>Likes <span>${photo.likes}</span></b>
+      </p>
+      <p class="info-item">
+        <b>Views <span>${photo.views}</span></b>
+      </p>
+      <p class="info-item">
+        <b>Comments <span>${photo.comments}</span></b>
+      </p>
+      <p class="info-item">
+        <b>Downloads <span>${photo.downloads}</span></b>
+      </p>
+    </div>
+  </div></a
+>
+`;
 
 //? код без класса(олд)
 // import { fetchPhotos } from './fetchModule';
