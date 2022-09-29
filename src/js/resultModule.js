@@ -88,7 +88,6 @@ function createPhotoEl(photos) {
 // let captionsData = (boxGallery.options.captionsData = 'alt');
 // let captionDelay = (boxGallery.options.captionDelay = 250);
 
-
 //? код без класса(олд)
 // import { fetchPhotos } from './fetchModule';
 // import Notiflix from 'notiflix';
@@ -129,37 +128,4 @@ function createPhotoEl(photos) {
 
 //     // console.log(data.hits)
 //   });
-// }
-
-// //? разметка для создания галереи
-// function createPhotoEl(photos) {
-//   const photoList = photos.map(photo => {
-//     return `<div class="photo-card">
-//   <img src="${photo.largeImageURL}" alt="${photo.tags}" loading="lazy" />
-//   <div class="info">
-//     <p class="info-item">
-//       <b>Likes <span>${photo.likes}</span></b>
-//     </p>
-//     <p class="info-item">
-//       <b>Views <span>${photo.views}</span></b>
-//     </p>
-//     <p class="info-item">
-//       <b>Comments <span>${photo.comments}</span></b>
-//     </p>
-//     <p class="info-item">
-//       <b>Downloads <span>${photo.downloads}</span></b>
-//     </p>
-//   </div>
-// </div>`;
-//   });
-//   photoList.forEach(markupPhoto => {
-//     gallery.insertAdjacentHTML('beforeend', markupPhoto);
-//   });
-// }
-
-// //!
-// function onLoadMorePressed() {
-//   pages++;
-//   console.log(pages);
-//   onFormSubmit(event);
 // }
