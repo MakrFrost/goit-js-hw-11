@@ -12,9 +12,9 @@ export default class PhotoApiService {
     this.page = 1;
   }
 
-  fetchPhotos() {
+  async fetchPhotos() {
     try {
-      const responce = axios.get(
+      const responce = await axios.get(
         `${API_WEB}${API_KEY}q=${this.needToFind}${API_OPTIONS}${API_ORDER}&page=${this.page}`
       );
       const data = responce.data;
